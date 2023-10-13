@@ -815,7 +815,7 @@ struct npc_giant_claw_tentacle : public ScriptedAI
     void ScheduleTasks()
     {
         // Check if a target is in melee range
-        _scheduler.Schedule(10s, [this](TaskContext task)
+        _scheduler.Schedule(20s, [this](TaskContext task)
             {
                 if (Unit* target = me->GetVictim())
                 {
@@ -862,13 +862,13 @@ struct npc_giant_claw_tentacle : public ScriptedAI
         }
 
         DoCastSelf(SPELL_SUBMERGE_VISUAL);
-        me->SetHealth(me->GetMaxHealth());
+        //me->SetHealth(me->GetMaxHealth());
         me->SetUnitFlag(UNIT_FLAG_NOT_SELECTABLE | UNIT_FLAG_NON_ATTACKABLE);
 
         _scheduler.CancelAll();
         _canAttack = false;
 
-        _scheduler.Schedule(5s, [this](TaskContext /*task*/)
+        _scheduler.Schedule(10s, [this](TaskContext /*task*/)
             {
                 Emerge();
             });
