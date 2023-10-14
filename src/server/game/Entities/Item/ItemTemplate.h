@@ -149,6 +149,7 @@ enum ItemFlags : uint32
     ITEM_FLAG_CONJURED                          = 0x00000002, // Conjured item
     ITEM_FLAG_HAS_LOOT                          = 0x00000004, // Item can be right clicked to open for loot
     ITEM_FLAG_HEROIC_TOOLTIP                    = 0x00000008, // Makes green "Heroic" text appear on item
+    ITEM_FLAG_MYTHIC_TOOLTIP                    = 0x00000009, // Makes green "Mythic" text appear on item
     ITEM_FLAG_DEPRECATED                        = 0x00000010, // Cannot equip or use
     ITEM_FLAG_NO_USER_DESTROY                   = 0x00000020, // Item can not be destroyed, except by using spell (item can be reagent for spell)
     ITEM_FLAG_PLAYERCAST                        = 0x00000040, // Item's spells are castable by players
