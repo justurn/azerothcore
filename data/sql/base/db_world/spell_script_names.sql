@@ -326,7 +326,7 @@ INSERT INTO `spell_script_names` (`spell_id`, `ScriptName`) VALUES
 	(22888, 'spell_gen_rallying_cry_of_the_dragonslayer'),
 	(22999, 'spell_item_goblin_jumper_cables_xl'),
 	(23019, 'spell_item_crystal_prison_dummy_dnd'),
-	(23074, 'spell_item_arcanite_dragonling'),
+	-- (23074, 'spell_item_arcanite_dragonling'),
 	(23075, 'spell_item_mithril_mechanical_dragonling'),
 	(23076, 'spell_item_mechanical_dragonling'),
 	(23133, 'spell_item_gnomish_battle_chicken'),
