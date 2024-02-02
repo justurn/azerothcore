@@ -86,6 +86,7 @@ struct boss_lady_vashj : public BossAI
         _count = 0;
         _recentlySpoken = false;
         _batTimer = 20s;
+        _playerAngle = 0.0f;
         BossAI::Reset();
 
         ScheduleHealthCheckEvent(70, [&]{
@@ -174,14 +175,18 @@ struct boss_lady_vashj : public BossAI
         {
             return;
         }
-
+        me->AddUnitState(UNIT_STATE_ROOT);
         me->SetFacingTo(me->GetHomePosition().GetOrientation());
         instance->SetData(DATA_ACTIVATE_SHIELD, 0);
         scheduler.CancelAll();
-
         scheduler.Schedule(2400ms, [this](TaskContext context)
         {
-            DoCastRandomTarget(SPELL_FORKED_LIGHTNING);
+            if (Unit* target = SelectTarget(SelectTargetMethod::Random, 0))
+            {
+                _playerAngle = me->GetAngle(target);
+                me->SetOrientation(_playerAngle);
+                DoCast(target, SPELL_FORKED_LIGHTNING);
+            }
             context.Repeat(2400ms, 12450ms);
         }).Schedule(0s, [this](TaskContext context)
         {
@@ -204,6 +209,7 @@ struct boss_lady_vashj : public BossAI
             if (!me->HasAura(SPELL_MAGIC_BARRIER))
             {
                 Talk(SAY_PHASE3);
+                me->ClearUnitState(UNIT_STATE_ROOT);
                 me->SetReactState(REACT_AGGRESSIVE);
                 me->GetMotionMaster()->MoveChase(me->GetVictim());
                 scheduler.CancelAll();
@@ -258,6 +264,7 @@ struct boss_lady_vashj : public BossAI
     }
 
 private:
+    float _playerAngle;
     bool _recentlySpoken;
     bool _intro;
     int32 _count;
