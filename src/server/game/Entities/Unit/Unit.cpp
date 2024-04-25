@@ -7913,6 +7913,35 @@ bool Unit::HandleDummyAuraProc(Unit* victim, uint32 damage, AuraEffect* triggere
                             }
                             break;
                         }
+                    // Magical Attunement
+                    case 91056:
+                        {
+                            // if healed by another unit (victim)
+                            if (this == victim)
+                                return false;
+
+                            // dont allow non-positive dots to proc
+                            if (!procSpell || !procSpell->IsPositive())
+                                return false;
+
+                            HealInfo const* healInfo = eventInfo.GetHealInfo();
+                            if (!healInfo)
+                            {
+                                return false;
+                            }
+
+                            uint32 effectiveHeal = healInfo->GetEffectiveHeal();
+                            if (effectiveHeal)
+                            {
+                                // heal amount
+                                basepoints0 = int32(CalculatePct(effectiveHeal, triggerAmount));
+                                target = this;
+
+                                if (basepoints0)
+                                    triggered_spell_id = 91055;
+                            }
+                            break;
+                        }
                     // Paladin Tier 6 Trinket (Ashtongue Talisman of Zeal)
                     case 40470:
                         {
