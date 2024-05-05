@@ -73,10 +73,8 @@ public:
         {
             ASSERT(field < file.fieldCount);
             size_t stringOffset = getUInt(field);
-            std::cout << "The string table is " << file.stringTable << '\n';
             if (stringOffset >= file.stringSize ){
                 std::cout << "The Value of stringOffset is " << stringOffset << '\n';
-                std::cout << "The string table is " << file.stringTable << '\n';
             }
             ASSERT(stringOffset < file.stringSize);
             return reinterpret_cast<char*>(file.stringTable + stringOffset);
