@@ -548,44 +548,6 @@ class spell_mage_fire_frost_ward : public spell_mage_incanters_absorbtion_base_A
     }
 };
 
-// 54646 - Focus Magic
-class spell_mage_focus_magic : public AuraScript
-{
-    PrepareAuraScript(spell_mage_focus_magic);
-
-    bool Validate(SpellInfo const* /*spellInfo*/) override
-    {
-        return ValidateSpellInfo({ SPELL_MAGE_FOCUS_MAGIC_PROC });
-    }
-
-    bool Load() override
-    {
-        _procTarget = nullptr;
-        return true;
-    }
-
-    bool CheckProc(ProcEventInfo& /*eventInfo*/)
-    {
-        _procTarget = GetCaster();
-        return _procTarget && _procTarget->IsAlive();
-    }
-
-    void HandleProc(AuraEffect const* aurEff, ProcEventInfo& /*eventInfo*/)
-    {
-        PreventDefaultAction();
-        GetTarget()->CastSpell(_procTarget, SPELL_MAGE_FOCUS_MAGIC_PROC, true, nullptr, aurEff);
-    }
-
-    void Register() override
-    {
-        DoCheckProc += AuraCheckProcFn(spell_mage_focus_magic::CheckProc);
-        OnEffectProc += AuraEffectProcFn(spell_mage_focus_magic::HandleProc, EFFECT_0, SPELL_AURA_MOD_SPELL_CRIT_CHANCE);
-    }
-
-private:
-    Unit* _procTarget;
-};
-
 // -11426 - Ice Barrier
 class spell_mage_ice_barrier_aura : public spell_mage_incanters_absorbtion_base_AuraScript
 {
