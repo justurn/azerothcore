@@ -2133,7 +2133,6 @@ void Spell::EffectOpenLock(SpellEffIndex effIndex)
     SkillType skillId = SKILL_NONE;
     int32 reqSkillValue = 0;
     int32 skillValue;
-    const int32 pick_lock = 1804; // pick lock spell ID
 
     SpellCastResult res = CanOpenLock(effIndex, lockId, skillId, reqSkillValue, skillValue);
     if (res != SPELL_CAST_OK)
@@ -2165,7 +2164,7 @@ void Spell::EffectOpenLock(SpellEffIndex effIndex)
                     gameObjTarget->AddToSkillupList(player->GetGUID());
                     
                     if(skillId == SKILL_LOCKPICKING){
-                        player->UpdateCraftSkill(pick_lock);
+                        player->UpdateCraftSkill(skillId);
                     }
                     else {
                         player->UpdateGatherSkill(skillId, pureSkillValue, reqSkillValue);
@@ -2177,7 +2176,7 @@ void Spell::EffectOpenLock(SpellEffIndex effIndex)
             {
                 // Do one skill-up
                 if(skillId == SKILL_LOCKPICKING){
-                        player->UpdateCraftSkill(pick_lock);
+                        player->UpdateCraftSkill(skillId);
                     }
                 else{
                     player->UpdateGatherSkill(skillId, pureSkillValue, reqSkillValue);
