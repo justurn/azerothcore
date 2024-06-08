@@ -2162,25 +2162,14 @@ void Spell::EffectOpenLock(SpellEffIndex effIndex)
                 if (!gameObjTarget->IsInSkillupList(player->GetGUID()))
                 {
                     gameObjTarget->AddToSkillupList(player->GetGUID());
-                    
-                    if(skillId == SKILL_LOCKPICKING){
-                        player->UpdateCraftSkill(skillId);
-                    }
-                    else {
-                        player->UpdateGatherSkill(skillId, pureSkillValue, reqSkillValue);
-                    }
+                    player->UpdateGatherSkill(skillId, pureSkillValue, reqSkillValue);
                 }
 
             }
             else if (itemTarget)
             {
                 // Do one skill-up
-                if(skillId == SKILL_LOCKPICKING){
-                        player->UpdateCraftSkill(skillId);
-                    }
-                else{
-                    player->UpdateGatherSkill(skillId, pureSkillValue, reqSkillValue);
-                }
+                player->UpdateGatherSkill(skillId, pureSkillValue, reqSkillValue);
             }
         }
     }
