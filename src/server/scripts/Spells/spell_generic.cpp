@@ -2431,7 +2431,7 @@ class spell_gen_lifeblood : public AuraScript
     void CalculateAmount(AuraEffect const* aurEff, int32& amount, bool& /*canBeRecalculated*/)
     {
         if (Unit* owner = GetUnitOwner())
-            amount += int32(CalculatePct(owner->GetMaxHealth(), 15f / aurEff->GetTotalTicks()));
+            amount += int32(CalculatePct(owner->GetMaxHealth(), 15.0f / aurEff->GetTotalTicks()));
             // increased bonus healing from 1.5% to 15% of max health over the duration.
     }
 
